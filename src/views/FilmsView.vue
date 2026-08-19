@@ -1,15 +1,33 @@
 <script setup lang="ts">
-import filmsResponse from '@/data/films.json'
+import { ref, onMounted } from 'vue'
+import { getFilms } from '@/api/swapi'
+import type { Film } from '@/types/swapi'
 import FilmCard from '@/components/FilmCard.vue'
 
-const films = [...filmsResponse.results].sort((a, b) => a.episode_id - b.episode_id)
+const films = ref<Film[]>([])
+const loading = ref(true)
+const error = ref<string | null>(null)
+
+onMounted(async () => {
+  try {
+    const result = await getFilms()
+    films.value = [...result].sort((a, b) => a.episode_id - b.episode_id)
+  } catch (err) {
+    error.value = err instanceof Error ? err.message : 'Something went wrong'
+  } finally {
+    loading.value = false
+  }
+})
 </script>
 
 <template>
   <main class="films-view">
     <h1>Star Wars films</h1>
 
-    <section class="films">
+    <p v-if="loading">Loading...</p>
+    <p v-else-if="error">Something went wrong: {{ error }}</p>
+
+    <section v-else class="films">
       <FilmCard v-for="film in films" :key="film.episode_id" :film="film" />
     </section>
   </main>
