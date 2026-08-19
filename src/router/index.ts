@@ -15,7 +15,7 @@ const router = createRouter({
       component: FilmsView,
     },
     {
-      path: '/films/:id',
+      path: '/films/episode-:episodeId',
       name: 'film-detail',
       component: FilmDetailView,
     },

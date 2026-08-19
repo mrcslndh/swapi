@@ -1,26 +1,14 @@
 <script setup lang="ts">
 import type { Film } from '@/types/swapi'
+import { getRomanNumeral } from '@/utils/roman'
 
 defineProps<{
   film: Film
 }>()
-
-const romanNumerals: Record<number, string> = {
-  1: 'I',
-  2: 'II',
-  3: 'III',
-  4: 'IV',
-  5: 'V',
-  6: 'VI',
-}
-
-function getRomanNumeral(episodeId: number) {
-  return romanNumerals[episodeId] ?? episodeId
-}
 </script>
 
 <template>
-  <RouterLink :to="`/films/${film.episode_id}`" class="film-card">
+  <RouterLink :to="`/films/episode-${film.episode_id}`" class="film-card">
     <h2 class="film-card__title">
       {{ film.title }}
     </h2>
@@ -44,6 +32,7 @@ function getRomanNumeral(episodeId: number) {
   height: 100%;
   padding: 24px;
   text-decoration: none;
+  transition: background-color 0.5s ease;
 }
 
 .film-card:hover {

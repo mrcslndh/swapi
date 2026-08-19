@@ -21,7 +21,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="films-view">
+  <main class="view-container films-view">
     <h1>Star Wars films</h1>
 
     <p v-if="loading">Loading...</p>
@@ -34,12 +34,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.films-view {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 32px;
-}
-
 .films {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -47,9 +41,6 @@ onMounted(async () => {
 }
 
 @media (max-width: 768px) {
-  .films-view {
-    padding-top: 8px;
-  }
   .films {
     grid-template-columns: 1fr;
   }

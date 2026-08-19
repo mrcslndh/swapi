@@ -35,3 +35,15 @@ textarea,
 select {
   font: inherit;
 }
+
+.view-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+@media (max-width: 768px) {
+  .view-container {
+    padding-top: 8px;
+  }
+}
